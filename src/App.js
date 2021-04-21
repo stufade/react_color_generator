@@ -7,7 +7,7 @@ import CardsBoards from "./components/CardsBoard";
 function App() {
   const [n, setn] = useState(5);
   const [colors, setcolors] = useState(createColors());
-  const max = 999;
+  const max = 3;
 
   function createColors() {
     let tempColors = [];
@@ -23,7 +23,7 @@ function App() {
 
   function onInput(e) {
     let value = e.target.value;
-    if (+value > max) {
+    if (value.length > max) {
       value = value.slice(1, 4);
       e.target.value = value;
     }
