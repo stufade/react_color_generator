@@ -1,15 +1,12 @@
 import {useState} from "react";
 import './index.css';
-import Button from "./components/Button";
-import Input from "./components/Input";
 import CardsBoards from "./components/CardsBoard";
+import CardsChange from "./components/CardsChange"
 
 function App() {
-  const [n, setn] = useState(5);
-  const [colors, setcolors] = useState(createColors());
-  const max = 3;
+  const [colors, setcolors] = useState(createColors(5));
 
-  function createColors() {
+  function createColors(n) {
     let tempColors = [];
     for (let i = 0; i < n; i++) {
       tempColors.push(randomColor());
@@ -17,25 +14,13 @@ function App() {
     return tempColors;
   }
 
-  function changeCards() {
-    setcolors(createColors());
+  function changeCards(numberOfCards) {
+    setcolors(createColors(numberOfCards));
   }
-
-  function onInput(e) {
-    let value = e.target.value;
-    if (value.length > max) {
-      value = value.slice(1, 4);
-      e.target.value = value;
-    }
-    setn(+value);
-  }
-
   
-
   return (
     <div className="container">
-      <Button onClick={() => changeCards()}/>
-      <Input onInput={onInput} onEnterClick={changeCards}/>
+      <CardsChange changeCards={changeCards}/>
       <CardsBoards colors={colors}/>
     </div>
   );
