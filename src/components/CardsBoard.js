@@ -1,24 +1,34 @@
 import Card from "./Card";
 
-const CardsBoard = ({colors}) => {
-    let number = colors.length;
+const CardsBoard = ({n}) => {
 
-    function renderCard(key) {
-        let clr = colors[key];
-        return <Card key={key} color={clr}/>
-    }
-
-    let cards = [];
-
-    for (let i = 0; i < number; i++) {
-        cards.push(renderCard(i));
-    }
+    let colors = createColors(n);
 
     return (
         <div className="flex">
-            {cards}
+            {colors.map((color, index) => 
+                <Card color={color} key={index}/>
+            )}
         </div>  
     )
 }
 
 export default CardsBoard;
+
+function createColors(n) {
+    let tempColors = [];
+    for (let i = 0; i < n; i++) {
+      tempColors.push(randomColor());
+    }
+    return tempColors;
+  }
+
+function randomColor() {
+    let c = '';
+  
+    while (c.length < 6) {
+        c += (Math.random()).toString(16).substr(-6).substr(-1);
+    }
+  
+    return '#' + c.toUpperCase();
+  }

@@ -1,39 +1,28 @@
-import {useState} from "react";
+import React from "react";
 import './index.css';
 import CardsBoards from "./components/CardsBoard";
 import CardsChange from "./components/CardsChange"
 
-function App() {
-  const [colors, setcolors] = useState(createColors(5));
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-  function createColors(n) {
-    let tempColors = [];
-    for (let i = 0; i < n; i++) {
-      tempColors.push(randomColor());
-    }
-    return tempColors;
+    this.state = {number: 5};
+    this.changeCards = this.changeCards.bind(this);
   }
 
-  function changeCards(numberOfCards) {
-    setcolors(createColors(numberOfCards));
+  changeCards(numberOfCards) {
+    this.setState({number: numberOfCards});
   }
-  
-  return (
-    <div className="container">
-      <CardsChange changeCards={changeCards}/>
-      <CardsBoards colors={colors}/>
-    </div>
-  );
+
+  render() {
+    return (
+      <div className="container">
+        <CardsChange changeCards={this.changeCards} />
+        <CardsBoards n={this.state.number} />
+      </div>
+    );
+  }
 }
 
 export default App;
-
-function randomColor() {
-  let c = '';
-
-  while (c.length < 6) {
-      c += (Math.random()).toString(16).substr(-6).substr(-1);
-  }
-
-  return '#' + c.toUpperCase();
-}
