@@ -8,17 +8,17 @@ class App extends React.Component {
     super(props);
 
     this.state = {number: 5};
-    this.changeCards = this.changeCards.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  changeCards(numberOfCards) {
+  handleClick(numberOfCards) {
     this.setState({number: numberOfCards});
   }
 
   render() {
     return (
       <div className="container">
-        <CardsChange changeCards={this.changeCards} />
+        <CardsChange onClick={this.handleClick} />
         <CardsBoards n={this.state.number} />
       </div>
     );

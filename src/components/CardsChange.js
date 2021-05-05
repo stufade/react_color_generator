@@ -2,7 +2,7 @@ import Input from "./Input";
 import Button from "./Button";
 import {useState} from "react";
 
-function CardsChange({changeCards}) {
+function CardsChange({onClick}) {
     function onInput(e) {
         let value = e.target.value;
         if (value.length > 3) {
@@ -12,16 +12,16 @@ function CardsChange({changeCards}) {
         setNumber(+value);
     }
 
-    function onClick() {
-        changeCards(number);
+    function onClickHandler() {
+        onClick(number);
     }
 
     const [number, setNumber] = useState(5);
 
     return (
         <>
-            <Button onClick={onClick}/>
-            <Input onInput={onInput} onEnterClick={onClick}/>
+            <Button onClick={onClickHandler}/>
+            <Input onInput={onInput} onEnterClick={onClickHandler} value={number} />
         </>
     )
 
